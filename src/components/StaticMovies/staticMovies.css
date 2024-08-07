@@ -1,0 +1,23 @@
+.cards-container {
+    /* border: 1px black solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    border: 1px black solid;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    margin-left: 0;
+  }
+  
+  .img-staticMovies {
+    width: 100%;
+  }
+  

@@ -1,0 +1,17 @@
+textarea {
+    resize: none;
+    outline: none;
+  }
+  
+  .textarea-div {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+  }
+  
+  .review-button {
+    width: 60px;
+    margin: auto;
+    margin: 2px;
+  }
+  

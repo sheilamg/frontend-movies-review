@@ -1,0 +1,9 @@
+.div-image{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-details{
+    margin-top: 2px;
+}

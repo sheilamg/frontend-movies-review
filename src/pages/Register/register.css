@@ -1,0 +1,27 @@
+#register-form {
+    font-family: cursive;
+    width: 250px;
+    height: 300px;
+    border-radius: 5%;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 35px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgb(43, 176, 194), rgb(6, 95, 107));
+    box-shadow: 20px 20px 20px lightslategray;
+  }
+  
+  .register-input {
+    margin: auto;
+    border: 0;
+    outline: none;
+    text-align: center;
+  }
+  
+  a {
+    text-decoration: none;
+    color: snow;
+  }
+  
