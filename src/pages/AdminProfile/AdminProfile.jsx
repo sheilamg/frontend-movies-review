@@ -91,24 +91,39 @@ export const AdminProfile = () => {
       <div className="mt-5">
         {load && <div>Loading..</div>}
         {error && <p>Error: {error}</p>}
-        <table className="table table-striped">
-          <thead>
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th>ID</th>
-              <th>UserName</th>
-              <th>Email</th>
-              <th>Reviews</th>
-              <th>Role</th>
-              <th>Actions</th>
+              <th scope="col" class="px-6 py-3">
+                ID
+              </th>
+              <th scope="col" class="px-6 py-3">
+                UserName
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Email
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Reviews
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Role
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {users?.map((item, i) => {
               return (
-                <tr key={i + 1}>
-                  <td>{item.id}</td>
+                <tr
+                  key={i + 1}
+                  className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                >
+                  <td className="px-6 py-4">{item.id}</td>
 
-                  <td>
+                  <td className="px-6 py-4">
                     {!(isEditing === item.id) ? (
                       item.username
                     ) : (
@@ -122,7 +137,7 @@ export const AdminProfile = () => {
                       />
                     )}
                   </td>
-                  <td>
+                  <td className="px-6 py-4">
                     {!(isEditing === item.id) ? (
                       item.email
                     ) : (
@@ -137,13 +152,15 @@ export const AdminProfile = () => {
                     )}
                   </td>
                   {/*<td>{item.password}</td>*/}
-                  <td>
+                  <td className="px-6 py-4">
                     {" "}
                     <Link to={`/profile/${item.id}`}>
-                      <button>Go to the Reviews</button>
+                      <button className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Go to the Reviews
+                      </button>
                     </Link>{" "}
                   </td>
-                  <td>
+                  <td className="px-6 py-4">
                     {!(isEditing === item.id) ? (
                       item.role.id
                     ) : (
@@ -157,16 +174,22 @@ export const AdminProfile = () => {
                       />
                     )}
                   </td>
-                  <td>
+                  <td className="px-6 py-4">
                     {!(isEditing === item.id) ? (
                       <>
-                        <button onClick={() => handleEdit(item.id)}>
+                        <button
+                          onClick={() => handleEdit(item.id)}
+                          className="px-4 py-2 text-sm rounded-sm font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]"
+                        >
                           Editar
                         </button>
                         <Link to={`/user/${item.id}`}>
                           <i className="fa fa-eye" aria-hidden="true"></i>
                         </Link>
-                        <button onClick={() => handelDelete(item.id)}>
+                        <button
+                          onClick={() => handelDelete(item.id)}
+                          className="px-4 py-2 text-sm rounded-sm font-bold text-white border-2 border-red-600 bg-red-600 transition-all ease-in-out duration-300 hover:bg-transparent hover:text-red-600"
+                        >
                           Delete Me
                         </button>
                       </>
@@ -181,7 +204,7 @@ export const AdminProfile = () => {
                         />
                         <button
                           type="submit"
-                          className="btn btn-primary submit-btn"
+                          className="px-4 py-2 text-sm rounded-sm font-bold text-white border-2 border-green-600 bg-green-600 transition-all ease-in-out duration-300 hover:bg-transparent hover:text-green-600"
                         >
                           Submit
                         </button>
