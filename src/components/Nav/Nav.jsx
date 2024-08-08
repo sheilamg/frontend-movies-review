@@ -8,6 +8,7 @@ const Nav = () => {
   );
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const userId = items?.user?.id || "";
 
   const handleSignOut = () => {
     console.log("User signed out");
@@ -73,13 +74,18 @@ const Nav = () => {
                 </p>
               </Link>
             </li>
-            <li className="max-lg:border-b max-lg:py-3 px-3">
-              <Link to={"/user-profile"}>
-                <p className="hover:text-[#007bff] text-[#333] block font-semibold text-[15px]">
-                  Profile
-                </p>
-              </Link>
-            </li>
+
+            {items ? (
+              <li className="max-lg:border-b max-lg:py-3 px-3">
+                <Link to={`/profile/${userId}`}>
+                  <p className="hover:text-[#007bff] text-[#333] block font-semibold text-[15px]">
+                    Profile
+                  </p>
+                </Link>
+              </li>
+            ) : (
+              <div></div>
+            )}
             <li className="max-lg:border-b max-lg:py-3 px-3">
               <a
                 href="javascript:void(0)"
@@ -100,17 +106,20 @@ const Nav = () => {
         </div>
 
         <div className="flex items-center ml-auto space-x-6">
-          <Link to={"/login"}>
-            <button className="font-semibold text-[15px] border-none outline-none">
-              <p className="text-[#007bff] hover:underline">Login</p>
+          {!items ? (
+            <Link to={"/login"}>
+              <button className="font-semibold text-[15px] border-none outline-none">
+                <p className="text-[#007bff] hover:underline">Login</p>
+              </button>
+            </Link>
+          ) : (
+            <button
+              onClick={handleSignOut}
+              className="px-4 py-2 text-sm rounded-sm font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]"
+            >
+              Sign up
             </button>
-          </Link>
-          <button
-            onClick={handleSignOut}
-            className="px-4 py-2 text-sm rounded-sm font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]"
-          >
-            Sign up
-          </button>
+          )}
 
           <button id="toggleOpen" className="lg:hidden">
             <svg

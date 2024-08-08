@@ -8,7 +8,15 @@ const UserProfile = () => {
   const [items, setItems] = useState(
     JSON.parse(localStorage.getItem("AuthToken"))
   );
-  const userId = items.user.id;
+
+  const { id } = useParams();
+
+  //const userId = items.user.id;
+  let userId = "";
+
+  id !== items.user.id && items.role == "admin"
+    ? (userId = id)
+    : (userId = items.user.id);
   //agregar logica para ver si el id es de user o de admin...
   //si tomamos del token, puede ser de admin o de user
   //desde el lado del admin el id es el que viene del user especifico
@@ -19,6 +27,7 @@ const UserProfile = () => {
     load,
     error,
   } = useFetch(`http://localhost:3002/users/${userId}`);
+
   const {
     editReview,
     loading: editing,
@@ -87,27 +96,27 @@ const UserProfile = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
-      <h1>User Profile</h1>
-      <p>User Name: {user.username}</p>
-
-      <p>Email: {user.email}</p>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">User Profile</h1>
+      <p className="text-lg mb-2">User Name: {user.username}</p>
+      <p className="text-lg mb-4">Email: {user.email}</p>
 
       {console.log(user.review)}
       {user.review.length > 0 ? (
         user.review.map((value, index) => (
-          <div key={index}>
-            <h2>Review {value.id}</h2>
+          <div key={index} className="border p-4 mb-4 rounded shadow-lg">
+            <h2 className="text-xl font-semibold mb-2">Review {value.id}</h2>
 
             {isEditing ? (
               <div>
-                <h2>
+                <h2 className="text-lg font-medium mb-2">
                   Title:
                   <input
                     type="text"
                     name="title"
                     value={editedReview.title}
                     onChange={handleChange}
+                    className="border p-2 rounded w-full"
                   />
                 </h2>
                 <p>
@@ -116,6 +125,7 @@ const UserProfile = () => {
                     name="description"
                     value={editedReview.description}
                     onChange={handleChange}
+                    className="border p-2 rounded w-full"
                   />
                 </p>
                 <p>
@@ -125,28 +135,50 @@ const UserProfile = () => {
                     name="rate"
                     value={editedReview.rate}
                     onChange={handleChange}
+                    className="border p-2 rounded w-full"
                   />
                 </p>
-                <button onClick={handleSave} disabled={editing}>
+                <button
+                  onClick={handleSave}
+                  disabled={editing}
+                  className="bg-green-500 text-white px-4 py-2 rounded mr-2 disabled:bg-gray-300"
+                >
                   {editing ? "Saving..." : "Save"}
                 </button>
-                <button onClick={() => setIsEditing(false)}>Cancel</button>
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="bg-red-500 text-white px-4 py-2 rounded"
+                >
+                  Cancel
+                </button>
               </div>
             ) : (
               <div>
-                <p>Title: {value.title}</p>
-                <p>Description: {value.description}</p>
-                <div>
+                <p className="text-lg font-medium mb-2">Title: {value.title}</p>
+                <p className="mb-2">Description: {value.description}</p>
+                <div className="mb-2">
                   Calification: <StaticStarRating rating={value.rate} />
                 </div>
-                <button onClick={() => handleEdit(value)}>Edit</button>
-                <button onClick={() => deleteReview(value)}>Delete</button>
+                <button
+                  onClick={() => handleEdit(value)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => deleteReview(value)}
+                  className="bg-red-500 text-white px-4 py-2 rounded"
+                >
+                  Delete
+                </button>
               </div>
             )}
           </div>
         ))
       ) : (
-        <div>It seems like you don't have any review yet..</div>
+        <div className="text-gray-500">
+          It seems like you don't have any review yet..
+        </div>
       )}
     </div>
   );

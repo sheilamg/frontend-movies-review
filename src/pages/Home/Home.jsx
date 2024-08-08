@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import StaticMovies from "../../components/StaticMovies/StaticMovies";
+import { SearchMovie } from "../../components/SearchMovie/SearchMovie";
 
 const Home = () => {
   return (
@@ -8,10 +7,7 @@ const Home = () => {
       <h1 style={{ textAlign: "center", fontFamily: "cursive" }}>
         Hang in there
       </h1>
-      <Link to={`/search-movie`}>
-        <button>Search Movies</button>
-      </Link>
-      <StaticMovies />
+      <SearchMovie />
     </>
   );
 };

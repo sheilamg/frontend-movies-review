@@ -1,12 +1,13 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const data = localStorage.getItem("AuthToken") ? JSON.parse(localStorage.getItem("AuthToken")):null
-  
-  
-  const [token, setToken] = useState((data) ? data.token : null);
+  const data = localStorage.getItem("AuthToken")
+    ? JSON.parse(localStorage.getItem("AuthToken"))
+    : null;
+
+  const [token, setToken] = useState(data ? data.token : null);
   console.log(token);
 
   const login = (userToken) => {
@@ -17,7 +18,6 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
   };
 
- 
   const isAuthenticated = !!token;
 
   return (
