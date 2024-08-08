@@ -7,7 +7,7 @@ const Nav = () => {
     JSON.parse(localStorage.getItem("AuthToken"))
   );
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const userId = items?.user?.id || "";
 
   const handleSignOut = () => {
@@ -17,6 +17,7 @@ const Nav = () => {
 
     console.log("Tokens have been removed");
     logout();
+    setItems(null);
     navigate("/login");
   };
 
@@ -75,7 +76,7 @@ const Nav = () => {
               </Link>
             </li>
 
-            {items ? (
+            {isAuthenticated ? (
               <li className="max-lg:border-b max-lg:py-3 px-3">
                 <Link to={`/profile/${userId}`}>
                   <p className="hover:text-[#007bff] text-[#333] block font-semibold text-[15px]">
@@ -106,7 +107,7 @@ const Nav = () => {
         </div>
 
         <div className="flex items-center ml-auto space-x-6">
-          {!items ? (
+          {!isAuthenticated ? (
             <Link to={"/login"}>
               <button className="font-semibold text-[15px] border-none outline-none">
                 <p className="text-[#007bff] hover:underline">Login</p>

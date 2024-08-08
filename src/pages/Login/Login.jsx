@@ -3,6 +3,10 @@ import { useAuth } from "../../utils/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  //const [items, setItems] = useState(
+  //  JSON.parse(localStorage.getItem("AuthToken"))
+  //);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
