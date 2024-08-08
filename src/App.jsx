@@ -9,7 +9,7 @@ import { AdminProfile } from "./pages/AdminProfile/AdminProfile";
 import { EditUser } from "./pages/AdminProfile/EditUser/EditUser";
 import { Login } from "./pages/Login/Login";
 import { AuthProvider } from "./utils/AuthProvider";
-import PrivateRoutes from "./utils/PrivateRoutes";
+import PrivateRoutes from "./utils/PrivateRoutes2";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Home from "./pages/Home/Home";
 import UserCreateReview from "./components/UserCreateReview/UserCreateReview";
@@ -25,7 +25,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             {/*private*/}
-            <Route element={<PrivateRoutes />}>
+            <Route element={<PrivateRoutes requiredRole="user" />}>
               {" "}
               <Route path="/profile/:id" element={<UserProfile />} />
               <Route
@@ -38,10 +38,10 @@ function App() {
               />
             </Route>
 
-            <Route element={<PrivateRoutes requiredRole="admin" />}></Route>
-
-            <Route path="/admin-profile" element={<AdminProfile />} />
-            <Route path="/edit-user/:id" element={<EditUser />} />
+            <Route element={<PrivateRoutes requiredRole="admin" />}>
+              <Route path="/admin-profile" element={<AdminProfile />} />
+              <Route path="/edit-user/:id" element={<EditUser />} />
+            </Route>
 
             <Route path="profile" element={<Profile />} />
             <Route path="register" element={<Register />} />
