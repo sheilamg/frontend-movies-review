@@ -3,9 +3,9 @@ import { useAuth } from "../../utils/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
-  //const [items, setItems] = useState(
-  //  JSON.parse(localStorage.getItem("AuthToken"))
-  //);
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("AuthToken"))
+  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,12 +24,16 @@ export const Login = () => {
       const data = await response.json();
 
       if (data.token) {
-        localStorage.setItem("AuthToken", JSON.stringify(data));
+        //ahora esto debería estar en authProvider component
+        //localStorage.setItem("AuthToken", JSON.stringify(data));
 
-        login(data.token);
+        login(data);
+
         if (data.role === "admin") {
           navigate("/admin-profile");
-        } else {
+        }
+
+        if (data.role === "user") {
           navigate("/search-movie");
         }
       }

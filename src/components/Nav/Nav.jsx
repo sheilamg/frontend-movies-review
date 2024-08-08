@@ -7,8 +7,10 @@ const Nav = () => {
     JSON.parse(localStorage.getItem("AuthToken"))
   );
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
-  const userId = items?.user?.id || "";
+  const { isAuthenticated, user, logout } = useAuth();
+  //const userId = items?.user?.id || "";
+
+  const [userId, setUserId] = useState(items?.user?.id || "");
 
   const handleSignOut = () => {
     console.log("User signed out");
@@ -78,7 +80,7 @@ const Nav = () => {
 
             {isAuthenticated ? (
               <li className="max-lg:border-b max-lg:py-3 px-3">
-                <Link to={`/profile/${userId}`}>
+                <Link to={`/profile/${user?.id}`}>
                   <p className="hover:text-[#007bff] text-[#333] block font-semibold text-[15px]">
                     Profile
                   </p>
